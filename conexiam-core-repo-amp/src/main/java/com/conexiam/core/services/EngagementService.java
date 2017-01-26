@@ -20,8 +20,10 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class EngagementService {
+    public static final String GROUP = "GROUP_";
     static Logger logger = Logger.getLogger(EngagementService.class);
 
     // Dependencies
@@ -138,7 +140,7 @@ public class EngagementService {
         // Create associations between the node and other objects
         String projectGroupName = engagementData.getProjectGroup();
         if (projectGroupName != null && projectGroupName.length() != 0) {
-            NodeRef projectGroup = authorityService.getAuthorityNodeRef(projectGroupName);
+            NodeRef projectGroup = authorityService.getAuthorityNodeRef(GROUP + projectGroupName);
             if (projectGroup != null) {
                 nodeService.createAssociation(engagement, projectGroup, CoreModel.ASSOC_PROJECT_GROUP);
             }
@@ -147,7 +149,7 @@ public class EngagementService {
 
         String clientGroupName = engagementData.getClientGroup();
         if (clientGroupName != null && clientGroupName.length() != 0) {
-            NodeRef clientGroup = authorityService.getAuthorityNodeRef(clientGroupName);
+            NodeRef clientGroup = authorityService.getAuthorityNodeRef(GROUP + clientGroupName);
             if (clientGroup != null) {
                 nodeService.createAssociation(engagement, clientGroup, CoreModel.ASSOC_CLIENT_GROUP);
             }
@@ -171,8 +173,8 @@ public class EngagementService {
         EngagementData currentData = EngagementNodeToDataTransformer.transform(nodeService, engagement);
 
         // Modify the properties if needed
-        if (!currentData.getRetentionEndDate().equals(updatedData.getRetentionEndDate()) ||
-                !currentData.getRetentionEndDate().equals(updatedData.getRetentionEndDate())) {
+        if (!Objects.equals(currentData.getRetentionEndDate(), updatedData.getRetentionEndDate()) ||
+                !Objects.equals(currentData.getRetentionEndDate(), updatedData.getRetentionEndDate())) {
             Map<QName, Serializable> props = new HashMap<QName, Serializable>();
             props.put(CoreModel.PROP_ENGAGEMENT_END_DATE, updatedData.getEngagementEndDate());
             props.put(CoreModel.PROP_RETENTION_END_DATE, updatedData.getRetentionEndDate());
@@ -182,55 +184,56 @@ public class EngagementService {
         }
 
         // Modify the associations if needed
-        if (!currentData.getProjectGroup().equals(updatedData.getProjectGroup())) {
+        if (!Objects.equals(currentData.getProjectGroup(), updatedData.getProjectGroup())) {
             String projectGroupName = updatedData.getProjectGroup();
-            if (projectGroupName != null && projectGroupName.length() != 0) {
-                NodeRef projectGroup = authorityService.getAuthorityNodeRef(projectGroupName);
-                if (projectGroup != null) {
-                    // if the association exists, remove it
-                    List<AssociationRef> assocs = nodeService.getTargetAssocs(engagement, CoreModel.ASSOC_PROJECT_GROUP);
-                    if (assocs != null && assocs.size() > 0) {
-                        nodeService.removeAssociation(engagement, assocs.get(0).getTargetRef(), CoreModel.ASSOC_PROJECT_GROUP);
-                    }
-                    // create a new one
-                    nodeService.createAssociation(engagement, projectGroup, CoreModel.ASSOC_PROJECT_GROUP);
-                }
+            if (projectGroupName != null) {
+                updateGroupAssociation(engagement, projectGroupName, CoreModel.ASSOC_PROJECT_GROUP);
             }
         }
 
-        if (!currentData.getClientGroup().equals(updatedData.getClientGroup())) {
+        if (!Objects.equals(currentData.getClientGroup(), updatedData.getClientGroup())) {
             String clientGroupName = updatedData.getClientGroup();
-            if (clientGroupName != null && clientGroupName.length() != 0) {
-                NodeRef clientGroup = authorityService.getAuthorityNodeRef(clientGroupName);
-                if (clientGroup != null) {
-                    // if the association exists, remove it
-                    List<AssociationRef> assocs = nodeService.getTargetAssocs(engagement, CoreModel.ASSOC_CLIENT_GROUP);
-                    if (assocs != null && assocs.size() > 0) {
-                        nodeService.removeAssociation(engagement, assocs.get(0).getTargetRef(), CoreModel.ASSOC_CLIENT_GROUP);
-                    }
-                    // create a new one
-                    nodeService.createAssociation(engagement, clientGroup, CoreModel.ASSOC_CLIENT_GROUP);
-                }
+            if (clientGroupName != null) {
+                updateGroupAssociation(engagement, clientGroupName, CoreModel.ASSOC_CLIENT_GROUP);
             }
         }
 
-        if (!currentData.getEngagementLead().equals(updatedData.getEngagementLead())) {
+        if (!Objects.equals(currentData.getEngagementLead(), updatedData.getEngagementLead())) {
             String engagementLeadName = updatedData.getEngagementLead();
-            if (engagementLeadName != null && engagementLeadName.length() != 0) {
-                NodeRef engagementLead = personService.getPerson(engagementLeadName);
-                if (engagementLead != null) {
-                    // if the association exists, remove it
-                    List<AssociationRef> assocs = nodeService.getTargetAssocs(engagement, CoreModel.ASSOC_ENGAGEMENT_LEAD);
-                    if (assocs != null && assocs.size() > 0) {
-                        nodeService.removeAssociation(engagement, assocs.get(0).getTargetRef(), CoreModel.ASSOC_ENGAGEMENT_LEAD);
-                    }
-                    // create a new one
-                    nodeService.createAssociation(engagement, engagementLead, CoreModel.ASSOC_ENGAGEMENT_LEAD);
-                }
+            if (engagementLeadName != null) {
+                updateUserAssociation(engagement, engagementLeadName, CoreModel.ASSOC_ENGAGEMENT_LEAD);
             }
         }
 
         return engagement;
+    }
+
+    private void updateGroupAssociation(NodeRef sourceNode, String groupName, QName assocQName) {
+        // if the association exists, remove it
+        List<AssociationRef> assocs = nodeService.getTargetAssocs(sourceNode, assocQName);
+        if (assocs != null && assocs.size() > 0) {
+            nodeService.removeAssociation(sourceNode, assocs.get(0).getTargetRef(), assocQName);
+        }
+        if (groupName.length() > 0) {
+            NodeRef clientGroup = authorityService.getAuthorityNodeRef(GROUP + groupName);
+            if (clientGroup != null) {
+                nodeService.createAssociation(sourceNode, clientGroup, assocQName);
+            }
+        }
+    }
+
+    private void updateUserAssociation(NodeRef sourceNode, String userName, QName assocQName) {
+        // if the association exists, remove it
+        List<AssociationRef> assocs = nodeService.getTargetAssocs(sourceNode, assocQName);
+        if (assocs != null && assocs.size() > 0) {
+            nodeService.removeAssociation(sourceNode, assocs.get(0).getTargetRef(), assocQName);
+        }
+        if (userName.length() > 0) {
+            NodeRef engagementLead = personService.getPerson(userName);
+            if (engagementLead != null) {
+                nodeService.createAssociation(sourceNode, engagementLead, assocQName);
+            }
+        }
     }
 
     private NodeRef createDataFolder(String siteId) {

@@ -6,6 +6,7 @@ import org.alfresco.model.ContentModel;
 import org.alfresco.service.cmr.repository.AssociationRef;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.NodeService;
+import org.alfresco.service.namespace.QName;
 
 import java.util.Date;
 import java.util.List;
@@ -20,16 +21,14 @@ public class EngagementNodeToDataTransformer {
         Date retentionEndDate = (Date) nodeService.getProperty(engagement, CoreModel.PROP_RETENTION_END_DATE);
         engagementData.setRetentionEndDate(retentionEndDate);
 
-        List<AssociationRef> clientGroupAssocs = nodeService.getTargetAssocs(engagement, CoreModel.ASSOC_CLIENT_GROUP);
-        if (clientGroupAssocs != null && clientGroupAssocs.size() >= 1) {
-            NodeRef clientGroup = clientGroupAssocs.get(0).getTargetRef();
-            engagementData.setClientGroup((String) nodeService.getProperty(clientGroup, ContentModel.PROP_AUTHORITY_NAME));
+        String clientGroupName = getGroupNameFromAssociation(nodeService, engagement, CoreModel.ASSOC_CLIENT_GROUP);
+        if (clientGroupName != null && clientGroupName.length() > 0) {
+            engagementData.setClientGroup(clientGroupName);
         }
 
-        List<AssociationRef> projectGroupAssocs = nodeService.getTargetAssocs(engagement, CoreModel.ASSOC_PROJECT_GROUP);
-        if (projectGroupAssocs != null && projectGroupAssocs.size() >= 1) {
-            NodeRef projectGroup = projectGroupAssocs.get(0).getTargetRef();
-            engagementData.setProjectGroup((String) nodeService.getProperty(projectGroup, ContentModel.PROP_AUTHORITY_NAME));
+        String projectGroupName = getGroupNameFromAssociation(nodeService, engagement, CoreModel.ASSOC_PROJECT_GROUP);
+        if (projectGroupName != null && projectGroupName.length() > 0) {
+            engagementData.setProjectGroup(projectGroupName);
         }
 
         List<AssociationRef> engagementLeadAssocs = nodeService.getTargetAssocs(engagement, CoreModel.ASSOC_ENGAGEMENT_LEAD);
@@ -39,5 +38,18 @@ public class EngagementNodeToDataTransformer {
         }
 
         return engagementData;
+    }
+
+    public static String getGroupNameFromAssociation(NodeService nodeService, NodeRef nodeRef, QName assocQName) {
+        String groupName = null;
+        List<AssociationRef> groupAssocs = nodeService.getTargetAssocs(nodeRef, assocQName);
+        if (groupAssocs != null && groupAssocs.size() >= 1) {
+            NodeRef clientGroup = groupAssocs.get(0).getTargetRef();
+            String groupId = (String) nodeService.getProperty(clientGroup, ContentModel.PROP_AUTHORITY_NAME);
+            if (groupId != null && groupId.length() > 0) {
+                groupName = groupId.substring(6, groupId.length()); // Drop the GROUP_ prefix
+            }
+        }
+        return groupName;
     }
 }
