@@ -17,5 +17,19 @@
 	limitations under the License.
 -->
 <beans>
-
+    <bean id="webscript.com.conexiam.engagements.engagement.post" class="com.conexiam.core.webscripts.SaveEngagement" parent="webscript">
+        <property name="engagementService">
+            <ref bean="engagement-service" />
+        </property>
+    </bean>
+    <bean id="webscript.com.conexiam.engagements.engagement.delete" class="com.conexiam.core.webscripts.DeleteEngagement" parent="webscript">
+        <property name="engagementService">
+            <ref bean="engagement-service" />
+        </property>
+    </bean>
+    <bean id="webscript.com.conexiam.engagements.engagement.get" class="com.conexiam.core.webscripts.GetEngagement" parent="webscript">
+        <property name="engagementService">
+            <ref bean="engagement-service" />
+        </property>
+    </bean>
 </beans>

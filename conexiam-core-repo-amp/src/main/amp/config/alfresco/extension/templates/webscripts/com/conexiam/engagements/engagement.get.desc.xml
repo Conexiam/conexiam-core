@@ -1,0 +1,8 @@
+<webscript>
+    <shortname>Get Engagement</shortname>
+    <description>Retrieves the engagement info from an engagement site</description>
+    <url>/conexiam/engagement/{siteId}</url>
+    <family>Conexiam</family>
+    <authentication>user</authentication>
+    <format default="json"></format>
+</webscript>

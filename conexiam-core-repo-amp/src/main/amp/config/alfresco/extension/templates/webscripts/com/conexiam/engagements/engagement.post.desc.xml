@@ -1,0 +1,8 @@
+<webscript>
+    <shortname>Save Engagement</shortname>
+    <description>Creates or updates the engagement info in an engagement site</description>
+    <url>/conexiam/engagement/{siteId}</url>
+    <family>Conexiam</family>
+    <authentication>user</authentication>
+    <format default="json"></format>
+</webscript>
