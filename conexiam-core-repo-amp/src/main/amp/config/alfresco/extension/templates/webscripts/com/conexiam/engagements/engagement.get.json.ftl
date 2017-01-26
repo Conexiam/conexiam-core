@@ -1,6 +1,6 @@
 {
-    "engagementEndDate": "${engagementEndDate?datetime}",
-    "retentionEndDate": "${retentionEndDate?datetime}",
+    "engagementEndDate": "<#if engagementEndDate??>${engagementEndDate?datetime}</#if>",
+    "retentionEndDate": "<#if retentionEndDate??>${retentionEndDate?datetime}</#if>",
     "clientGroup": "${clientGroup!''}",
     "projectGroup": "${projectGroup!''}",
     "engagementLead": "${engagementLead!''}"

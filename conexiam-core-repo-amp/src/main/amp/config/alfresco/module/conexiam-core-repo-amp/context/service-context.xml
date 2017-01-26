@@ -31,4 +31,11 @@
             <ref bean="PersonService" />
         </property>
     </bean>
+
+    <bean class="com.conexiam.core.services.EngagementServiceScopedObject" parent="baseJavaScriptExtension">
+        <property name="extensionName" value="engagements" />
+        <property name="engagementService">
+            <ref bean="engagement-service" />
+        </property>
+    </bean>
 </beans>
