@@ -33,6 +33,18 @@
             <version>${project.version}</version>
             <type>amp</type>
         </dependency>
+        <dependency>
+            <groupId>com.metaversant</groupId>
+            <artifactId>share-site-creators-share</artifactId>
+            <type>amp</type>
+            <version>0.0.6</version>
+        </dependency>
+        <dependency>
+            <groupId>de.fmaul</groupId>
+            <artifactId>javascript-console-share</artifactId>
+            <type>amp</type>
+            <version>0.7-SNAPSHOT</version>
+        </dependency>
         <!-- Uncomment if you are using RM (Records Management) module -->
         <!-- Make sure to set the correct version for 5.1 with alfresco.rm.version property in parent POM
         <dependency>
@@ -97,6 +109,16 @@
                         <overlay>
                             <groupId>${project.groupId}</groupId>
                             <artifactId>conexiam-core-share-amp</artifactId>
+                            <type>amp</type>
+                        </overlay>
+                        <overlay>
+                            <groupId>com.metaversant</groupId>
+                            <artifactId>share-site-creators-share</artifactId>
+                            <type>amp</type>
+                        </overlay>
+                        <overlay>
+                            <groupId>de.fmaul</groupId>
+                            <artifactId>javascript-console-share</artifactId>
                             <type>amp</type>
                         </overlay>
                         <!-- Uncomment if you are using RM module -->
