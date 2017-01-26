@@ -1,0 +1,69 @@
+<alfresco-config>
+
+    <!-- Existing nodes -->
+    <config evaluator="node-type" condition="cxm:engagement">
+        <forms>
+            <!-- Default form configuration for the cxm:engagement type -->
+            <form>
+                <field-visibility>
+                    <show id="cm:name" />
+                    <show id="cxm:engagementEndDate" force="true" />
+                    <show id="cxm:retentionEndDate" force="true" />
+                    <show id="cxm:clientGroup" />
+                    <show id="cxm:projectGroup" />
+                    <show id="cxm:engagementLead" />
+                </field-visibility>
+                <appearance>
+                    <field id="cm:name">
+                        <control>
+                            <control-param name="maxLength">255</control-param>
+                        </control>
+                    </field>
+                    <field id="cxm:engagementEndDate" label-id="prop.cxm_engagementEndDate">
+                        <control template="/org/alfresco/components/form/controls/date.ftl" />
+                    </field>
+                    <field id="cxm:retentionEndDate" label-id="prop.cxm_retentionEndDate">
+                        <control template="/org/alfresco/components/form/controls/date.ftl" />
+                    </field>
+                    <field id="cxm:clientGroup" label-id="assoc.cxm_clientGroup" />
+                    <field id="cxm:projectGroup" label-id="assoc.cxm_projectGroup" />
+                    <field id="cxm:engagementLead" label-id="assoc.cxm_engagementLead" />
+                </appearance>
+            </form>
+        </forms>
+    </config>
+
+    <!-- New nodes -->
+    <config evaluator="model-type" condition="cxm:engagement">
+        <forms>
+            <!-- Default form configuration for the cxm:engagement type -->
+            <form>
+                <field-visibility>
+                    <show id="cm:name" />
+                    <show id="cxm:engagementEndDate" force="true" />
+                    <show id="cxm:retentionEndDate" force="true" />
+                    <show id="cxm:clientGroup" />
+                    <show id="cxm:projectGroup" />
+                    <show id="cxm:engagementLead" />
+                </field-visibility>
+                <appearance>
+                    <field id="cm:name">
+                        <control>
+                            <control-param name="maxLength">255</control-param>
+                        </control>
+                    </field>
+                    <field id="cxm:engagementEndDate" label-id="prop.cxm_engagementEndDate">
+                        <control template="/org/alfresco/components/form/controls/date.ftl" />
+                    </field>
+                    <field id="cxm:retentionEndDate" label-id="prop.cxm_retentionEndDate">
+                        <control template="/org/alfresco/components/form/controls/date.ftl" />
+                    </field>
+                    <field id="cxm:clientGroup" label-id="assoc.cxm_clientGroup"/>
+                    <field id="cxm:projectGroup" label-id="assoc.cxm_projectGroup"/>
+                    <field id="cxm:engagementLead" label-id="assoc.cxm_engagementLead"/>
+                </appearance>
+            </form>
+        </forms>
+    </config>
+
+</alfresco-config>

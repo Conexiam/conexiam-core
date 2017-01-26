@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model name="cxmw:conexiamWorkflowModel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+
+    <description>Conexiam Workflow Model</description>
+    <author>Metaversant Group, Inc., Jeff Potts</author>
+    <version>1.0</version>
+
+    <imports>
+        <!-- Import Alfresco Dictionary Definitions -->
+        <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d"/>
+        <!-- Import Alfresco Content Domain Model Definitions -->
+        <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm"/>
+        <!-- Import Alfresco Workflow Model Definitions -->
+        <import uri="http://www.alfresco.org/model/bpm/1.0" prefix="bpm"/>
+    </imports>
+
+    <namespaces>
+        <namespace uri="http://www.conexiam.com/model/workflow/1.0" prefix="cxmw"/>
+    </namespaces>
+
+</model>

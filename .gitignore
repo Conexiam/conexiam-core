@@ -1,0 +1,8 @@
+*.log
+alf_data_dev
+conexiam-core-repo-amp/target
+conexiam-core-share-amp/target
+repo/target
+runner/target
+share/target
+solr-config/target
