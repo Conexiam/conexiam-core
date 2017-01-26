@@ -6,3 +6,4 @@ repo/target
 runner/target
 share/target
 solr-config/target
+.idea
