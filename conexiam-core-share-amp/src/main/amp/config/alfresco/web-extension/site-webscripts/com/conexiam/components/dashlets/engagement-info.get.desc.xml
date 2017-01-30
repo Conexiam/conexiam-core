@@ -1,0 +1,6 @@
+<webscript>
+    <shortname>Engagement Info</shortname>
+    <description>Displays the engagement info for this site</description>
+    <family>site-dashlet</family>
+    <url>/components/dashlets/conexiam/engagement-info</url>
+</webscript>

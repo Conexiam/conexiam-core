@@ -21,23 +21,11 @@
          	<scope>page</scope>
          	<region-id>component-1-1</region-id>
          	<source-id>site/${siteid}/dashboard</source-id>
-         	<url>/components/dashlets/site-profile</url>
-         </component>
-         <component>
-         	<scope>page</scope>
-         	<region-id>component-1-2</region-id>
-         	<source-id>site/${siteid}/dashboard</source-id>
-         	<url>/components/dashlets/site-links</url>
-         </component>
-         <component>
-         	<scope>page</scope>
-         	<region-id>component-1-3</region-id>
-         	<source-id>site/${siteid}/dashboard</source-id>
-         	<url>/components/dashlets/site-datalists</url>
+         	<url>/components/dashlets/conexiam/engagement-info</url>
          </component>
          <component>
             <scope>page</scope>
-            <region-id>component-1-4</region-id>
+            <region-id>component-1-2</region-id>
             <source-id>site/${siteid}/dashboard</source-id>
             <url>/components/dashlets/colleagues</url>
             <properties>
@@ -48,23 +36,11 @@
             <scope>page</scope>
             <region-id>component-2-1</region-id>
             <source-id>site/${siteid}/dashboard</source-id>
-            <url>/components/dashlets/site-notice</url>
+            <url>/components/dashlets/activityfeed</url>
          </component>
          <component>
             <scope>page</scope>
             <region-id>component-2-2</region-id>
-            <source-id>site/${siteid}/dashboard</source-id>
-            <url>/components/dashlets/forum-summary</url>
-         </component>
-         <component>
-            <scope>page</scope>
-            <region-id>component-2-3</region-id>
-            <source-id>site/${siteid}/dashboard</source-id>
-            <url>/components/dashlets/site-search</url>
-         </component>
-         <component>
-            <scope>page</scope>
-            <region-id>component-2-4</region-id>
             <source-id>site/${siteid}/dashboard</source-id>
             <url>/components/dashlets/docsummary</url>
          </component>
@@ -78,7 +54,7 @@
             <template-instance>dashboard-2-columns-wide-right</template-instance>
             <authentication>user</authentication>
             <properties>
-               <sitePages>[{"pageId":"documentlibrary"},{"pageId":"discussions-topiclist"},{"pageId":"calendar"},{"pageId":"data-lists"},{"pageId":"links"}]</sitePages>
+               <sitePages>[{"pageId":"documentlibrary"}]</sitePages>
             </properties>
          </page>
       </pages>
