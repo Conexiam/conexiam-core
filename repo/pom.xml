@@ -59,6 +59,12 @@
             <type>amp</type>
         </dependency>
         <dependency>
+            <groupId>com.conexiam</groupId>
+            <artifactId>acl-templates-repo</artifactId>
+            <version>1.0.0</version>
+            <type>amp</type>
+        </dependency>
+        <dependency>
             <groupId>de.fmaul</groupId>
             <artifactId>javascript-console-repo</artifactId>
             <type>amp</type>
@@ -120,6 +126,11 @@
                         <overlay>
                             <groupId>com.metaversant</groupId>
                             <artifactId>share-site-space-templates-repo</artifactId>
+                            <type>amp</type>
+                        </overlay>
+                        <overlay>
+                            <groupId>com.conexiam</groupId>
+                            <artifactId>acl-templates-repo</artifactId>
                             <type>amp</type>
                         </overlay>
                         <overlay>
