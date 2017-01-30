@@ -1,4 +1,39 @@
 <alfresco-config>
+    <config evaluator="string-compare" condition="DocumentLibrary">
+        <!--
+           Used by the "Manage Aspects" action
+
+           For custom aspects, remember to also add the relevant i18n string(s)
+              cm_myaspect=My Aspect
+        -->
+        <aspects>
+        <!-- Aspects that a user can see -->
+            <visible>
+                <aspect name="cxm:aclTemplatable" />
+            </visible>
+
+            <!-- Aspects that a user can add. Same as "visible" if left empty -->
+            <addable>
+            </addable>
+
+            <!-- Aspects that a user can remove. Same as "visible" if left empty -->
+            <removeable>
+            </removeable>
+        </aspects>
+
+        <!--
+           Used by the "Change Type" action
+           Define valid subtypes using the following example:
+              <type name="cm:content">
+                 <subtype name="cm:mysubtype" />
+              </type>
+
+           Remember to also add the relevant i18n string(s):
+              cm_mysubtype=My SubType
+        -->
+        <types>
+        </types>
+    </config>
 
     <!-- Existing nodes -->
     <config evaluator="node-type" condition="cxm:engagement">
@@ -58,9 +93,24 @@
                     <field id="cxm:retentionEndDate" label-id="prop.cxm_retentionEndDate">
                         <control template="/org/alfresco/components/form/controls/date.ftl" />
                     </field>
-                    <field id="cxm:clientGroup" label-id="assoc.cxm_clientGroup"/>
-                    <field id="cxm:projectGroup" label-id="assoc.cxm_projectGroup"/>
-                    <field id="cxm:engagementLead" label-id="assoc.cxm_engagementLead"/>
+                    <field id="cxm:clientGroup" label-id="assoc.cxm_clientGroup" />
+                    <field id="cxm:projectGroup" label-id="assoc.cxm_projectGroup" />
+                    <field id="cxm:engagementLead" label-id="assoc.cxm_engagementLead" />
+                </appearance>
+            </form>
+        </forms>
+    </config>
+
+    <config evaluator="aspect" condition="cxm:aclTemplatable">
+        <forms>
+            <form>
+                <field-visibility>
+                    <show id="cxm:defaultAclTemplate" />
+                    <show id="cxm:aclTemplate" for-mode="view" />
+                </field-visibility>
+                <appearance>
+                    <field id="cxm:defaultAclTemplate" label-id="prop.cxm_defaultAclTemplate" />
+                    <field id="cxm:aclTemplate" label-id="prop.cxm_aclTemplate" read-only="true" />
                 </appearance>
             </form>
         </forms>

@@ -51,11 +51,25 @@ public class EngagementService {
         if (dataFolder == null) {
             return null;
         }
-        NodeRef engagement = getEngagement(dataFolder);
+        NodeRef engagement = getEngagementNode(dataFolder);
         if (engagement == null) {
             return null;
         }
         return EngagementNodeToDataTransformer.transform(nodeService, engagement);
+    }
+
+    /**
+     * Returns an EngagementData object for the specified node reference.
+     * @param nodeRef The node ref of an object that is contained by an engagement site.
+     * @return The EngagementData object for the site that contains the node.
+     * @throws EngagementServiceException when the site cannot be found.
+     */
+    public EngagementData getEngagement(NodeRef nodeRef) throws EngagementServiceException {
+        SiteInfo siteInfo = siteService.getSite(nodeRef);
+        if (siteInfo == null) {
+            throw new EngagementServiceException("Site not found for node: " + nodeRef.getId());
+        }
+        return getEngagement(siteInfo.getShortName());
     }
 
     /**
@@ -81,7 +95,7 @@ public class EngagementService {
         }
 
         // if the engagement info does not exist, create it
-        NodeRef engagement = getEngagement(dataFolder);
+        NodeRef engagement = getEngagementNode(dataFolder);
         if (engagement == null) {
             engagement = createEngagement(dataFolder, engagementData);
         } else {
@@ -106,13 +120,13 @@ public class EngagementService {
         if (dataFolder == null) {
             return;
         }
-        NodeRef engagement = getEngagement(dataFolder);
+        NodeRef engagement = getEngagementNode(dataFolder);
         if (engagement != null) {
             nodeService.deleteNode(engagement);
         }
     }
 
-    private NodeRef getEngagement(NodeRef dataFolder) {
+    private NodeRef getEngagementNode(NodeRef dataFolder) {
         List<ChildAssociationRef> children = nodeService.getChildAssocs(dataFolder);
         if (children.size() <= 0) {
             return null;

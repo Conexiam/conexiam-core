@@ -1,0 +1,13 @@
+{
+  "inherit": false,
+  "permissions": [
+    {
+      "authorityTemplate": "project-group",
+      "permission": "SiteCollaborator"
+    },
+    {
+      "authorityTemplate": "client-group",
+      "permission": "SiteConsumer"
+    }
+  ]
+}

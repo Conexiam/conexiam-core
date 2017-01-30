@@ -24,6 +24,12 @@
             <groupId>${alfresco.groupId}</groupId>
             <artifactId>alfresco-repository</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.conexiam</groupId>
+            <artifactId>acl-templates-common</artifactId>
+            <version>1.0.0</version>
+            <scope>provided</scope>
+        </dependency>
 
         <!-- Uncomment if you are using RM (Records Management) module, brings in RM related classes -->
         <!--

@@ -72,4 +72,17 @@
       </type>
     </types>
 
+    <aspects>
+        <aspect name="cxm:aclTemplatable">
+            <title>ACL Templatable</title>
+            <properties>
+                <property name="cxm:defaultAclTemplate">
+                    <type>d:text</type>
+                </property>
+                <property name="cxm:aclTemplate">
+                    <type>d:text</type>
+                </property>
+            </properties>
+        </aspect>
+    </aspects>
 </model>
