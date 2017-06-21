@@ -21,6 +21,14 @@ public class EngagementServiceScopedObject extends BaseScopableProcessorExtensio
         return engagementData;
     }
 
+    public void save(String siteId, EngagementData engagementData) {
+        try {
+            engagementService.saveEngagement(siteId, engagementData);
+        } catch (EngagementServiceException ese) {
+            logger.error(ese);
+        }
+    }
+
     public void setEngagementService(EngagementService engagementService) {
         this.engagementService = engagementService;
     }
