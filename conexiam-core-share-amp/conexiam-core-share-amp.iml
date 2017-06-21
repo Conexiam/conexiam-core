@@ -182,6 +182,5 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.eclipse.jetty:jetty-continuation:7.4.0.v20110414" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.eclipse.jetty:jetty-http:7.4.0.v20110414" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: args4j:args4j:2.0.16" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: com.h2database:h2:1.4.190" level="project" />
   </component>
 </module>

@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.conexiam</groupId>
     <artifactId>conexiam-core</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <name>Conexiam Core</name>
     <description>Conexiam core Alfresco customizations</description>
     <packaging>pom</packaging>
