@@ -8,3 +8,7 @@ share/target
 solr-config/target
 .idea
 solr.log.*
+conexiam-core-platform-jar/target
+conexiam-core-share-jar/target
+integration-tests/target
+target

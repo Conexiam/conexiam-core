@@ -1,0 +1,24 @@
+<extension>
+  <modules>
+    <module>
+      <id>Additional Site Presets</id>
+      <version>1.0</version>
+      <auto-deploy>true</auto-deploy>
+      <evaluator type="default.extensibility.evaluator"/>
+      <customizations>
+        <customization>
+           <targetPackageRoot>org.alfresco</targetPackageRoot>
+           <sourcePackageRoot>com.conexiam.presets</sourcePackageRoot>
+        </customization>
+
+        <customization>
+           <targetPackageRoot>org.alfresco.share.pages</targetPackageRoot>
+           <sourcePackageRoot>com.conexiam.presets</sourcePackageRoot>
+           <alwaysApply>
+              <webscript>share-header</webscript>
+           </alwaysApply>
+        </customization>
+      </customizations>
+    </module>
+  </modules>
+</extension>
